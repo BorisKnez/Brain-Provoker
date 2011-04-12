@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent" android:background="@drawable/main_menu_game1" android:orientation="horizontal">
+    <LinearLayout android:gravity="center" android:id="@+id/linearLayout1" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="230dip">
+        <ImageButton android:background="@drawable/new_game" android:id="@+id/btn_new_game" android:layout_width="180dip" android:layout_height="50dip"></ImageButton>
+    </LinearLayout>
 </LinearLayout>
