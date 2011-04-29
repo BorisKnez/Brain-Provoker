@@ -3,18 +3,18 @@ package edu.boris.brainprovoker.android;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 
 public class spomin extends Activity implements OnClickListener {
@@ -25,7 +25,7 @@ public class spomin extends Activity implements OnClickListener {
 		rumen, //2
 		zelen  //3
 	}
-	
+	///status igre koncan ali poteka
 	enum status_igre{
 		poteka, 
 		koncan, 
@@ -36,8 +36,9 @@ public class spomin extends Activity implements OnClickListener {
 	private static final int START_DIALOG = 1;              //start dialog
 	Brain_provoker_app app;									//skupen app vseh
 	ImageButton rdec,moder,rumen,zelen;
+	TextView prikaz_stopnje,txtspodaj;
 	
-	List<gumbi> zaporedje=new ArrayList<gumbi>();           //polje zaporedja
+	public List<gumbi> zaporedje=new ArrayList<gumbi>();           //polje zaporedja
 	status_igre status;				//status igre
 	int korak=0;
 	
@@ -54,6 +55,8 @@ public class spomin extends Activity implements OnClickListener {
         moder = (ImageButton)findViewById(R.id.btnModer);
         rumen = (ImageButton)findViewById(R.id.btnRumen);
         zelen = (ImageButton)findViewById(R.id.btnZelen);
+        prikaz_stopnje=(TextView)findViewById(R.id.txtPrikazZgoraj);
+        txtspodaj=(TextView)findViewById(R.id.txtPrikazSpodaj);
         
         rdec.setOnClickListener(this);
         moder.setOnClickListener(this);
@@ -73,6 +76,7 @@ public class spomin extends Activity implements OnClickListener {
         alphaUp.setDuration(1000);
         alphaDown.setFillAfter(true);
         alphaUp.setFillAfter(true);
+        ///////////////////////////////zelen/////////////////////////////
     	if (arg0.getId()==R.id.btnZelen)
     	{
     		if(status==status_igre.poteka && korak<zaporedje.size())
@@ -85,11 +89,14 @@ public class spomin extends Activity implements OnClickListener {
 		    		zelen.startAnimation(alphaUp);
 		    		while(mp.isPlaying()){}
 		    		mp.release();
-		    		if(korak==(zaporedje.size()-1)){ igraj(); return;}
+		    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); return;}
 		    		korak++;
-    			}else{ status=status_igre.koncan; }
+    			}
+    			else{ status=status_igre.koncan; }
     		}
     	}
+    	///////////////////////////////////////////////////////////////////
+    	//////////////////////////moder////////////////////////////////////
     	else
 	    	if (arg0.getId()==R.id.btnModer)
 	    	{
@@ -103,11 +110,14 @@ public class spomin extends Activity implements OnClickListener {
 			    		moder.startAnimation(alphaUp);
 			    		while(mp.isPlaying()){}
 			    		mp.release();
-			    		if(korak==(zaporedje.size()-1)){ igraj(); return;}
+			    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); return;}
 			    		korak++;
-	    			}else{ status=status_igre.koncan; }
+	    			}
+	    			else{ status=status_igre.koncan; }
 	    		}
 	    	}
+    	///////////////////////////////////////////////////////////////////////
+    	////////////////////////rdec/////////////////////////////////////////////
 	    	else
 		    	if (arg0.getId()==R.id.btnRdec)
 		    	{
@@ -121,11 +131,14 @@ public class spomin extends Activity implements OnClickListener {
 				    		rdec.startAnimation(alphaUp);
 				    		while(mp.isPlaying()){}
 				    		mp.release();
-				    		if(korak==(zaporedje.size()-1)){ igraj(); return;}
+				    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); return;}
 				    		korak++;
-		    			}else{ status=status_igre.koncan; }
+		    			}
+		    			else{ status=status_igre.koncan; }
 		    		}
 		    	}
+    	////////////////////////////////////////////////////////////////////
+    	///////////////////rumen/////////////////////////////////////////
 		    	else
 			    	if (arg0.getId()==R.id.btnRumen)
 			    	{
@@ -139,17 +152,20 @@ public class spomin extends Activity implements OnClickListener {
 					    		rumen.startAnimation(alphaUp);
 					    		while(mp.isPlaying()){}
 					    		mp.release();
-					    		if(korak==(zaporedje.size()-1)){ igraj(); return;}
+					    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); return;}
 					    		korak++;
-			    			}else{ status=status_igre.koncan; }
+			    			}
+			    			else{ status=status_igre.koncan; }
 			    		}
 			    	}
     	alphaDown.reset();
     	alphaUp.reset();
+    	preveriigro();
     }
     //doda nakljucen zvok v listo in poklice predvajaj
     public void igraj()
     {
+    	txtspodaj.setText("Computers turn");
     	korak=0;
     	int r=rand.nextInt(4);
     	switch(r){
@@ -166,58 +182,110 @@ public class spomin extends Activity implements OnClickListener {
     		zaporedje.add(gumbi.zelen);
     		break;
     	}
-    	predvajaj();
-    	omogocigumbe();
+    	predvajaj pred=new predvajaj();
+    	pred.execute();
     }
     
-    //prdevaja zvoke iz zaporedja
-    public void predvajaj()
-    {		
-    	for(int i=0;i<zaporedje.size();i++)
+    //prdevaja zvoke iz zaporedja v asinhronem tasku
+    public class predvajaj extends AsyncTask<String, Integer, String>
+    {	
+    	public List<gumbi> lista=new ArrayList<spomin.gumbi>();
+    	
+    	
+    	@Override
+		protected void onPreExecute() 
     	{
-    		alphaDown = new AlphaAnimation(1.0f, 0.3f);
-            alphaUp = new AlphaAnimation(0.3f, 1.0f);
-            alphaDown.setDuration(1000);
-            alphaUp.setDuration(1000);
-            alphaDown.setFillAfter(true);
-            alphaUp.setFillAfter(true);
-    		switch(zaporedje.get(i)){
-    		case rdec:
-    			rdec.startAnimation(alphaDown);
-	    		MediaPlayer mp1 = MediaPlayer.create(this, R.raw.red);
-	    		mp1.start();
-	    		rdec.startAnimation(alphaUp);
-	    		while(mp1.isPlaying()){}
-	    		mp1.release();
-    			break;
-    		case moder:
-    			moder.startAnimation(alphaDown);
-	    		MediaPlayer mp2 = MediaPlayer.create(this, R.raw.blue);
-	    		mp2.start();
-	    		moder.startAnimation(alphaUp);
-	    		while(mp2.isPlaying()){}
-	    		mp2.release();
-    			break;
-    		case rumen:
-    			rumen.startAnimation(alphaDown);
-	    		MediaPlayer mp3 = MediaPlayer.create(this, R.raw.yellow);
-	    		mp3.start();
-	    		rumen.startAnimation(alphaUp);
-	    		while(mp3.isPlaying()){}
-	    		mp3.release();
-    			break;
-    		case zelen:
-    			zelen.startAnimation(alphaDown);
-        		MediaPlayer mp4 = MediaPlayer.create(this, R.raw.green);
-        		mp4.start();
-        		zelen.startAnimation(alphaUp);
-        		while(mp4.isPlaying()){}
-        		mp4.release();
-    			break;
-    		}
-    		alphaDown.reset();
-        	alphaUp.reset();
+    		lista=zaporedje;
+    		try {
+				Thread.sleep(1500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
     	}
+    	
+    	@Override
+        protected String doInBackground(String... url) 
+        {
+            try {
+            	for(int i=0;i<lista.size();i++)
+    	    	{
+            		Thread.sleep(500);
+            		switch(lista.get(i)){
+            		case rdec:
+            			publishProgress(0);
+            			if(i==lista.size()-1)publishProgress(5);
+            			Thread.sleep(500);
+            			break;
+            		case moder:
+            			publishProgress(1);
+            			if(i==lista.size()-1)publishProgress(5);
+            			Thread.sleep(500);
+            			break;
+            		case rumen:
+            			publishProgress(2);
+            			if(i==lista.size()-1)publishProgress(5);
+            			Thread.sleep(500);
+            			break;
+            		case zelen:
+            			publishProgress(3);
+            			if(i==lista.size()-1)publishProgress(5);
+            			Thread.sleep(500);
+            			break;
+            		}
+    	    	}
+            } catch (Exception e) {}
+            return null;
+        }
+    	
+    	protected void onProgressUpdate(Integer... args)
+        {
+	    		alphaDown = new AlphaAnimation(1.0f, 0.3f);
+	            alphaUp = new AlphaAnimation(0.3f, 1.0f);
+	            alphaDown.setDuration(1000);
+	            alphaUp.setDuration(1000);
+	            alphaDown.setFillAfter(true);
+	            alphaUp.setFillAfter(true);
+	    		switch(args[0]){
+	    		case 0:
+	    			rdec.startAnimation(alphaDown);
+		    		MediaPlayer mp1 = MediaPlayer.create(spomin.this, R.raw.red);
+		    		mp1.start();
+		    		rdec.startAnimation(alphaUp);
+		    		while(mp1.isPlaying()){}
+		    		mp1.release();
+	    			break;
+	    		case 1:
+	    			moder.startAnimation(alphaDown);
+		    		MediaPlayer mp2 = MediaPlayer.create(spomin.this, R.raw.blue);
+		    		mp2.start();
+		    		moder.startAnimation(alphaUp);
+		    		while(mp2.isPlaying()){}
+		    		mp2.release();
+	    			break;
+	    		case 2:
+	    			rumen.startAnimation(alphaDown);
+		    		MediaPlayer mp3 = MediaPlayer.create(spomin.this, R.raw.yellow);
+		    		mp3.start();
+		    		rumen.startAnimation(alphaUp);
+		    		while(mp3.isPlaying()){}
+		    		mp3.release();
+	    			break;
+	    		case 3:
+	    			zelen.startAnimation(alphaDown);
+	        		MediaPlayer mp4 = MediaPlayer.create(spomin.this, R.raw.green);
+	        		mp4.start();
+	        		zelen.startAnimation(alphaUp);
+	        		while(mp4.isPlaying()){}
+	        		mp4.release();
+	    			break;
+	    		case 5:
+	    			omogocigumbe();
+	    			txtspodaj.setText("Your turn");
+	    			break;
+	    		}
+	    		alphaDown.reset();
+	        	alphaUp.reset();
+        }
     	
     }
     
@@ -270,4 +338,17 @@ public class spomin extends Activity implements OnClickListener {
 		status=status_igre.poteka;
 	}
 	
+	//koncamo trenutno igro(ponovimo igro ali nadaljevanje na 2 del igre)
+	public void preveriigro()
+	{
+		if(status==status_igre.koncan)
+		{
+			MediaPlayer mp = MediaPlayer.create(this, R.raw.gameover);
+    		mp.start();
+    		while(mp.isPlaying()){}
+    		mp.release();
+    		txtspodaj.setText("Game over");
+    		onemogocigumbe();
+		}
+	}
 }
