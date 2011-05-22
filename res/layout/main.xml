@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" android:background="@drawable/main_menu_game1" android:orientation="vertical">
-    
-    <LinearLayout android:gravity="center" android:id="@+id/linearLayout1" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="220dip">
-        <ImageButton android:background="@drawable/new_game" android:id="@+id/btn_new_game" android:layout_width="170dip" android:layout_height="45dip"></ImageButton>
-    </LinearLayout>
-    <LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:gravity="center" android:layout_width="fill_parent" android:layout_marginTop="2dip">
-        <ImageButton android:layout_height="45dip" android:layout_width="170dip" android:background="@drawable/settings" android:id="@+id/btn_settings"></ImageButton>
-    </LinearLayout>
-    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/linearLayout3" android:gravity="center" android:layout_marginTop="2dip">
-        <ImageButton android:background="@drawable/instructions" android:layout_width="170dip" android:layout_height="45dip" android:id="@+id/btn_instructions"></ImageButton>
-    </LinearLayout>
-    <LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/linearLayout4" android:gravity="center" android:layout_marginTop="2dip">
-        <ImageButton android:background="@drawable/quit" android:layout_width="170dip" android:layout_height="45dip" android:id="@+id/btn_quit"></ImageButton>
-    </LinearLayout>
+    android:background="@drawable/main_menu_game1" android:orientation="vertical" android:layout_height="match_parent" android:layout_width="match_parent" android:gravity="bottom">
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout1" android:gravity="center">
+        <ImageButton android:layout_height="45dip" android:id="@+id/btn_new_game" android:layout_width="170dip" android:background="@drawable/new_game" android:layout_alignParentTop="true"></ImageButton>
+    </RelativeLayout>
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout2" android:gravity="center" android:layout_marginTop="4dip">
+        <ImageButton android:layout_height="45dip" android:id="@+id/btn_settings" android:layout_width="170dip" android:background="@drawable/settings" android:layout_alignParentTop="true"></ImageButton>
+    </RelativeLayout>
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout3" android:gravity="center" android:layout_marginTop="4dip">
+        <ImageButton android:id="@+id/btn_instructions" android:layout_width="170dip" android:layout_height="45dip" android:background="@drawable/instructions" android:layout_alignParentTop="true"></ImageButton>
+    </RelativeLayout>
+    <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout4" android:gravity="center" android:layout_marginTop="4dip" android:layout_marginBottom="20dip">
+        <ImageButton android:id="@+id/btn_quit" android:layout_width="170dip" android:layout_height="45dip" android:background="@drawable/quit" android:layout_alignParentTop="true"></ImageButton>
+    </RelativeLayout>
 </LinearLayout>

@@ -4,12 +4,16 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 
 public class Brain_provoker_main extends Activity implements OnClickListener
@@ -21,18 +25,32 @@ public class Brain_provoker_main extends Activity implements OnClickListener
 	public static final String SCORE="PLAYER_SCORE"; //-||-
 	Brain_provoker_app app;
 	private AlphaAnimation alphaDown,alphaUp;
-	ImageButton new_game;
+	ImageButton new_game, settings, instructions, exit_game;
 	Menu mMenu;
+	//int sirina_zaslona, visina_zaslona;
 	
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        
+        //DisplayMetrics metrics = new DisplayMetrics();
+        //getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        //sirina_zaslona=metrics.widthPixels;
+        //visina_zaslona=metrics.heightPixels;
+        
         app=(Brain_provoker_app) getApplication();
         new_game=(ImageButton)findViewById(R.id.btn_new_game);
+        settings=(ImageButton)findViewById(R.id.btn_settings);
+        instructions=(ImageButton)findViewById(R.id.btn_instructions);
+        exit_game=(ImageButton)findViewById(R.id.btn_quit);
         
         new_game.setOnClickListener(this);
+        settings.setOnClickListener(this);
+        instructions.setOnClickListener(this);
+        exit_game.setOnClickListener(this);
+
     }
     
     public void onClick(View arg0){
@@ -49,6 +67,12 @@ public class Brain_provoker_main extends Activity implements OnClickListener
     		Intent newgame=new Intent(this,spomin.class);
     		new_game.startAnimation(alphaUp);
     		this.startActivityForResult(newgame, SPOMIN);
+    	}
+    	if (arg0.getId()==R.id.btn_quit)
+    	{
+    		exit_game.startAnimation(alphaDown);
+    		exit_game.startAnimation(alphaUp);
+    		finish();
     	}
     	
     	alphaDown.reset();
