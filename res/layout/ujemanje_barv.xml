@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent" android:orientation="vertical" android:gravity="center" android:id="@+id/linearParent">
+  
+      <ProgressBar android:layout_width="fill_parent" style="?android:attr/progressBarStyleHorizontal" android:id="@+id/progressbar_Horizontal"
+		android:max="60000" android:layout_gravity="top" android:layout_height="wrap_content"/>
+	
+	
+    <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_width="match_parent" android:gravity="center">
+        <TextView android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="10dip" android:textSize="40px" android:id="@+id/tvSpodaj6"></TextView>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/linearLayout2" android:layout_height="wrap_content" android:layout_width="match_parent" android:gravity="center">
+        <TextView android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="40px" android:id="@+id/tvSpodaj5"></TextView>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/linearLayout3" android:layout_height="wrap_content" android:layout_width="match_parent" android:gravity="center">
+        <TextView android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="40px" android:id="@+id/tvSpodaj4"></TextView>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/linearLayout4" android:layout_height="wrap_content" android:layout_width="match_parent" android:gravity="center">
+        <TextView android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="40px" android:id="@+id/tvSpodaj3"></TextView>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/linearLayout5" android:layout_height="wrap_content" android:layout_width="match_parent" android:gravity="center">
+        <TextView android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="40px" android:id="@+id/tvSpodaj2"></TextView>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/linearLayout6" android:layout_height="wrap_content" android:layout_width="match_parent" android:gravity="center">
+        <TextView android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="40px" android:id="@+id/tvSpodaj1"></TextView>
+    </LinearLayout>
+    <LinearLayout android:id="@+id/linearLayout7" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_marginTop="20dip" android:gravity="center">
+        <ImageButton android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="20dip" android:id="@+id/imbDa" android:background="@drawable/da" android:layout_marginRight="70dip"></ImageButton>
+        <ImageButton android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginRight="20dip" android:id="@+id/imbNe" android:background="@drawable/ne"></ImageButton>
+    </LinearLayout>
+    
+</LinearLayout>

@@ -3,6 +3,8 @@ package edu.boris.brainprovoker.android;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
@@ -20,6 +22,7 @@ public class Brain_provoker_main extends Activity implements OnClickListener
 {
 	//globalne deklaracije spremenljivk
 	private static final int SPOMIN = 1;  //za nov activity
+	private static final int BARVE = 2;  //za nov activity
 	public static final String PREF_NAME="SETTINGS";  //za ime nastavitev
 	public static final String NAME="PLAYER_NAME"; //za ime spremenljivke v nastavitvah
 	public static final String SCORE="PLAYER_SCORE"; //-||-
@@ -64,9 +67,11 @@ public class Brain_provoker_main extends Activity implements OnClickListener
     	if (arg0.getId()==R.id.btn_new_game)
     	{
     		new_game.startAnimation(alphaDown);
-    		Intent newgame=new Intent(this,spomin.class);
+    		//Intent newgame=new Intent(this,spomin.class);
+    		Intent newgame=new Intent(this,ujemanje_barv.class);
     		new_game.startAnimation(alphaUp);
-    		this.startActivityForResult(newgame, SPOMIN);
+    		//this.startActivityForResult(newgame, SPOMIN);
+    		this.startActivityForResult(newgame, BARVE);
     	}
     	if (arg0.getId()==R.id.btn_quit)
     	{
@@ -142,7 +147,11 @@ public class Brain_provoker_main extends Activity implements OnClickListener
 	////menu^^^//////
     
     
-    
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+	    super.onConfigurationChanged(newConfig);
+	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	}
     
     
     

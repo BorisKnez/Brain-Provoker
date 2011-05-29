@@ -8,10 +8,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
@@ -40,6 +44,7 @@ public class spomin extends Activity implements OnClickListener {
 	Brain_provoker_app app;									//skupen app vseh
 	ImageButton rdec,moder,rumen,zelen;
 	TextView prikaz_stopnje,txtspodaj;
+	float volume;
 	
 	public List<gumbi> zaporedje=new ArrayList<gumbi>();           //polje zaporedja
 	status_igre status;				//status igre
@@ -67,6 +72,7 @@ public class spomin extends Activity implements OnClickListener {
         zelen.setOnClickListener(this);
         
         onemogocigumbe();
+        volume=(float)20;
         showDialog(START_DIALOG);
     }
     
@@ -88,6 +94,7 @@ public class spomin extends Activity implements OnClickListener {
     			{
 		    		zelen.startAnimation(alphaDown);
 		    		MediaPlayer mp = MediaPlayer.create(this, R.raw.green);
+		    		mp.setVolume(volume, volume);
 		    		mp.start();
 		    		zelen.startAnimation(alphaUp);
 		    		while(mp.isPlaying()){}
@@ -109,6 +116,7 @@ public class spomin extends Activity implements OnClickListener {
 	    			{
 			    		moder.startAnimation(alphaDown);
 			    		MediaPlayer mp = MediaPlayer.create(this, R.raw.blue);
+			    		mp.setVolume(volume, volume);
 			    		mp.start();
 			    		moder.startAnimation(alphaUp);
 			    		while(mp.isPlaying()){}
@@ -130,6 +138,7 @@ public class spomin extends Activity implements OnClickListener {
 		    			{
 				    		rdec.startAnimation(alphaDown);
 				    		MediaPlayer mp = MediaPlayer.create(this, R.raw.red);
+				    		mp.setVolume(volume, volume);
 				    		mp.start();
 				    		rdec.startAnimation(alphaUp);
 				    		while(mp.isPlaying()){}
@@ -151,6 +160,7 @@ public class spomin extends Activity implements OnClickListener {
 			    			{
 					    		rumen.startAnimation(alphaDown);
 					    		MediaPlayer mp = MediaPlayer.create(this, R.raw.yellow);
+					    		mp.setVolume(volume, volume);
 					    		mp.start();
 					    		rumen.startAnimation(alphaUp);
 					    		while(mp.isPlaying()){}
@@ -209,6 +219,7 @@ public class spomin extends Activity implements OnClickListener {
     		case 0:
     			rdec.startAnimation(alphaDown);
 	    		MediaPlayer mp1 = MediaPlayer.create(spomin.this, R.raw.red);
+	    		mp1.setVolume(volume, volume);
 	    		mp1.start();
 	    		rdec.startAnimation(alphaUp);
 	    		while(mp1.isPlaying()){}
@@ -217,6 +228,7 @@ public class spomin extends Activity implements OnClickListener {
     		case 1:
     			moder.startAnimation(alphaDown);
 	    		MediaPlayer mp2 = MediaPlayer.create(spomin.this, R.raw.blue);
+	    		mp2.setVolume(volume, volume);
 	    		mp2.start();
 	    		moder.startAnimation(alphaUp);
 	    		while(mp2.isPlaying()){}
@@ -225,6 +237,7 @@ public class spomin extends Activity implements OnClickListener {
     		case 2:
     			rumen.startAnimation(alphaDown);
 	    		MediaPlayer mp3 = MediaPlayer.create(spomin.this, R.raw.yellow);
+	    		mp3.setVolume(volume, volume);
 	    		mp3.start();
 	    		rumen.startAnimation(alphaUp);
 	    		while(mp3.isPlaying()){}
@@ -233,6 +246,7 @@ public class spomin extends Activity implements OnClickListener {
     		case 3:
     			zelen.startAnimation(alphaDown);
         		MediaPlayer mp4 = MediaPlayer.create(spomin.this, R.raw.green);
+        		mp4.setVolume(volume, volume);
         		mp4.start();
         		zelen.startAnimation(alphaUp);
         		while(mp4.isPlaying()){}
@@ -361,6 +375,7 @@ public class spomin extends Activity implements OnClickListener {
 		if(status==status_igre.koncan)
 		{
 			MediaPlayer mp = MediaPlayer.create(this, R.raw.gameover);
+			mp.setVolume(volume, volume);
     		mp.start();
     		while(mp.isPlaying()){}
     		mp.release();
@@ -369,4 +384,26 @@ public class spomin extends Activity implements OnClickListener {
     		showDialog(CONTINUE_DIALOG);
 		}
 	}
+	
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+	    super.onConfigurationChanged(newConfig);
+	    setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+	}
+	
+	public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+		AudioManager mAudioManager = (AudioManager) getSystemService(AUDIO_SERVICE);
+		int current = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+		switch(keyCode)
+		{
+		case KeyEvent.KEYCODE_VOLUME_UP:
+			mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, current+1, AudioManager.FLAG_VIBRATE);
+			break;
+		case KeyEvent.KEYCODE_VOLUME_DOWN:
+			mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, current-1, AudioManager.FLAG_VIBRATE);
+			break;
+		}
+		return false;
+    }
 }
