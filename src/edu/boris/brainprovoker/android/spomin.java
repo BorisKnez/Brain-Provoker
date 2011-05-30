@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.media.AudioManager;
@@ -49,6 +50,8 @@ public class spomin extends Activity implements OnClickListener {
 	public List<gumbi> zaporedje=new ArrayList<gumbi>();           //polje zaporedja
 	status_igre status;				//status igre
 	int korak=0;
+	
+	
 	
     /** Called when the activity is first created. */
     @Override
@@ -99,7 +102,7 @@ public class spomin extends Activity implements OnClickListener {
 		    		zelen.startAnimation(alphaUp);
 		    		while(mp.isPlaying()){}
 		    		mp.release();
-		    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); return;}
+		    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); app.player_score+=((korak+1)*10); return;}
 		    		korak++;
     			}
     			else{ status=status_igre.koncan; }
@@ -121,7 +124,7 @@ public class spomin extends Activity implements OnClickListener {
 			    		moder.startAnimation(alphaUp);
 			    		while(mp.isPlaying()){}
 			    		mp.release();
-			    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); return;}
+			    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); app.player_score+=((korak+1)*10); return;}
 			    		korak++;
 	    			}
 	    			else{ status=status_igre.koncan; }
@@ -143,7 +146,7 @@ public class spomin extends Activity implements OnClickListener {
 				    		rdec.startAnimation(alphaUp);
 				    		while(mp.isPlaying()){}
 				    		mp.release();
-				    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); return;}
+				    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); app.player_score+=((korak+1)*10); return;}
 				    		korak++;
 		    			}
 		    			else{ status=status_igre.koncan; }
@@ -165,7 +168,7 @@ public class spomin extends Activity implements OnClickListener {
 					    		rumen.startAnimation(alphaUp);
 					    		while(mp.isPlaying()){}
 					    		mp.release();
-					    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); return;}
+					    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); app.player_score+=((korak+1)*10); return;}
 					    		korak++;
 			    			}
 			    			else{ status=status_igre.koncan; }
@@ -326,12 +329,12 @@ public class spomin extends Activity implements OnClickListener {
 			return builder.create();
 		case CONTINUE_DIALOG:
 			builder = new AlertDialog.Builder(this);
-			builder.setMessage("This game is over! Current score: ")
+			builder.setMessage("This game is over! Current score: "+app.player_score)
 			.setCancelable(false)
 			.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int id) {
-					//igraj();
+					drugaIgra();
 					//dodaj za klic druge igre!!!
 					dialog.cancel();
 				}
@@ -350,7 +353,11 @@ public class spomin extends Activity implements OnClickListener {
 	}
    ////////////////////////////////
 	
-	
+	public void drugaIgra()
+	{
+		Intent newgame=new Intent(this,ujemanje_barv.class);
+		this.startActivity(newgame);
+	}
 	
 	public void onemogocigumbe()
 	{

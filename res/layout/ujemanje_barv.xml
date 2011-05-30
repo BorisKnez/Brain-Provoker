@@ -27,8 +27,9 @@
         <TextView android:text="TextView" android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="40px" android:id="@+id/tvSpodaj1"></TextView>
     </LinearLayout>
     <LinearLayout android:id="@+id/linearLayout7" android:layout_height="wrap_content" android:layout_width="match_parent" android:layout_marginTop="20dip" android:gravity="center">
-        <ImageButton android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="20dip" android:id="@+id/imbDa" android:background="@drawable/da" android:layout_marginRight="70dip"></ImageButton>
-        <ImageButton android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginRight="20dip" android:id="@+id/imbNe" android:background="@drawable/ne"></ImageButton>
+        <ImageButton android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginLeft="20dip" android:id="@+id/imbDa" android:background="@drawable/da" android:layout_marginRight="10dip" android:layout_weight="1"></ImageButton>
+        <TextView android:layout_marginRight="10dip" android:id="@+id/tvScoreUJemanjeBarv" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0" android:layout_weight="1" android:gravity="center" android:textSize="20px"></TextView>
+        <ImageButton android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_marginRight="20dip" android:id="@+id/imbNe" android:background="@drawable/ne" android:layout_weight="1"></ImageButton>
     </LinearLayout>
     
 </LinearLayout>

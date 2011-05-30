@@ -6,23 +6,19 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 
 public class Brain_provoker_main extends Activity implements OnClickListener
 {
 	//globalne deklaracije spremenljivk
 	private static final int SPOMIN = 1;  //za nov activity
-	private static final int BARVE = 2;  //za nov activity
+	//private static final int BARVE = 2;  //za nov activity
 	public static final String PREF_NAME="SETTINGS";  //za ime nastavitev
 	public static final String NAME="PLAYER_NAME"; //za ime spremenljivke v nastavitvah
 	public static final String SCORE="PLAYER_SCORE"; //-||-
@@ -67,12 +63,13 @@ public class Brain_provoker_main extends Activity implements OnClickListener
     	if (arg0.getId()==R.id.btn_new_game)
     	{
     		new_game.startAnimation(alphaDown);
-    		//Intent newgame=new Intent(this,spomin.class);
-    		Intent newgame=new Intent(this,ujemanje_barv.class);
+    		Intent newgame=new Intent(this,spomin.class);
     		new_game.startAnimation(alphaUp);
-    		//this.startActivityForResult(newgame, SPOMIN);
-    		this.startActivityForResult(newgame, BARVE);
+    		this.startActivityForResult(newgame, SPOMIN);
+    		//Intent newgame=new Intent(this,ujemanje_barv.class);
+    		//this.startActivityForResult(newgame, BARVE);
     	}
+    	else
     	if (arg0.getId()==R.id.btn_quit)
     	{
     		exit_game.startAnimation(alphaDown);

@@ -6,11 +6,13 @@ public class Beseda {
 	
 	public String ime;
 	public Paint barva;
+	public boolean enako;
 	
-	public Beseda(String i, Paint p)
+	public Beseda(String i, Paint p, boolean b)
 	{
 		this.ime=i;
 		this.barva=p;
+		this.enako=b;
 	}
 	public Beseda(){}
 	
