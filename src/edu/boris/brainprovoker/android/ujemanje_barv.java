@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Bundle;
@@ -60,7 +61,7 @@ public class ujemanje_barv extends Activity implements OnClickListener {
         tv5=(TextView)findViewById(R.id.tvSpodaj5);
         tv6=(TextView)findViewById(R.id.tvSpodaj6);
         tvscore=(TextView)findViewById(R.id.tvScoreUJemanjeBarv);
-        tvscore.setText(Integer.toString(app.player_score));
+        tvscore.setText(Integer.toString(app.player.score));
         vpisiBesede();       //vpisemo v textboxe
         da.setOnClickListener(this);
         ne.setOnClickListener(this);
@@ -75,28 +76,28 @@ public class ujemanje_barv extends Activity implements OnClickListener {
 		{
 			if(seznam_besed.get(0).enako)
 			{
-				app.player_score+=20;
+				app.player.score+=20;
 			}
 			else
-			{app.player_score-=30;}
+			{app.player.score-=30;}
 				
 			seznam_besed.remove(0);
 			vpisiBesede();
-			tvscore.setText(Integer.toString(app.player_score));
+			tvscore.setText(Integer.toString(app.player.score));
 		}
 		else
 		if(arg0.getId()==R.id.imbNe)
 		{
 			if(!seznam_besed.get(0).enako)
 			{
-				app.player_score+=20;
+				app.player.score+=20;
 			}
 			else
-			{app.player_score-=30;}
+			{app.player.score-=30;}
 				
 			seznam_besed.remove(0);
 			vpisiBesede();
-			tvscore.setText(Integer.toString(app.player_score));
+			tvscore.setText(Integer.toString(app.player.score));
 		}
     }
 	 
@@ -189,7 +190,6 @@ public class ujemanje_barv extends Activity implements OnClickListener {
 	    			break;
 	    		case 1:
 	    			c.koncaj();
-	    			//Toast.makeText(c, "Konec", Toast.LENGTH_LONG);
 	    			break;
 	    		}
 	  }
@@ -226,14 +226,15 @@ public class ujemanje_barv extends Activity implements OnClickListener {
 				return builder.create();
 			case FINISH_DIALOG:
 				builder = new AlertDialog.Builder(this);
-				builder.setMessage("Game is over: Your score: "+app.player_score)
+				builder.setMessage("Game is over: Your score: "+app.player.score)
 				.setCancelable(false)
 				.setPositiveButton("Go to scores", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
-						//igraj();
-						//dodaj za klic druge igre!!!
+						app.rezultati.add(app.player);
 						dialog.cancel();
+						gotoscores();
+		    			finish();
 					}
 					
 				})
@@ -273,7 +274,11 @@ public class ujemanje_barv extends Activity implements OnClickListener {
 		}
 	 
 	 
-	 
+	 public void gotoscores()
+	 {
+		 Intent nov2=new Intent(this,ScoreListActivity.class);
+		 this.startActivity(nov2);
+	 }
 	 
 	 
 }

@@ -102,7 +102,7 @@ public class spomin extends Activity implements OnClickListener {
 		    		zelen.startAnimation(alphaUp);
 		    		while(mp.isPlaying()){}
 		    		mp.release();
-		    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); app.player_score+=((korak+1)*10); return;}
+		    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); app.player.score+=((korak+1)*10); return;}
 		    		korak++;
     			}
     			else{ status=status_igre.koncan; }
@@ -124,7 +124,7 @@ public class spomin extends Activity implements OnClickListener {
 			    		moder.startAnimation(alphaUp);
 			    		while(mp.isPlaying()){}
 			    		mp.release();
-			    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); app.player_score+=((korak+1)*10); return;}
+			    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); app.player.score+=((korak+1)*10); return;}
 			    		korak++;
 	    			}
 	    			else{ status=status_igre.koncan; }
@@ -146,7 +146,7 @@ public class spomin extends Activity implements OnClickListener {
 				    		rdec.startAnimation(alphaUp);
 				    		while(mp.isPlaying()){}
 				    		mp.release();
-				    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); app.player_score+=((korak+1)*10); return;}
+				    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); app.player.score+=((korak+1)*10); return;}
 				    		korak++;
 		    			}
 		    			else{ status=status_igre.koncan; }
@@ -168,7 +168,7 @@ public class spomin extends Activity implements OnClickListener {
 					    		rumen.startAnimation(alphaUp);
 					    		while(mp.isPlaying()){}
 					    		mp.release();
-					    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); app.player_score+=((korak+1)*10); return;}
+					    		if(korak==(zaporedje.size()-1)){ igraj(); onemogocigumbe(); prikaz_stopnje.setText("Level: "+zaporedje.size()); app.player.score+=((korak+1)*10); return;}
 					    		korak++;
 			    			}
 			    			else{ status=status_igre.koncan; }
@@ -329,7 +329,7 @@ public class spomin extends Activity implements OnClickListener {
 			return builder.create();
 		case CONTINUE_DIALOG:
 			builder = new AlertDialog.Builder(this);
-			builder.setMessage("This game is over! Current score: "+app.player_score)
+			builder.setMessage("This game is over! Current score: "+app.player.score)
 			.setCancelable(false)
 			.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
 				@Override
@@ -337,6 +337,7 @@ public class spomin extends Activity implements OnClickListener {
 					drugaIgra();
 					//dodaj za klic druge igre!!!
 					dialog.cancel();
+					finish();
 				}
 				
 			})

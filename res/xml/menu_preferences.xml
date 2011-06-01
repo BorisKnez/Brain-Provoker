@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+	<!-- Display settings -->
+	<PreferenceCategory android:title="Settings">
+		<!--  <CheckBoxPreference android:key="ISOK"
+			android:title="Pomoc pri ugibanju" 
+			android:summaryOn="DA!"
+			android:summaryOff="NE!"
+			android:defaultValue="true" />
+		<ListPreference android:key="TEZAVNOST" android:title="Tezavnost"
+			android:summary="Nastavite max ugibanj(default 5)"
+			android:entries="@array/tezavnost"
+			android:entryValues="@array/tezavnost" 
+			android:dialogTitle="Izberi vrednost"
+			android:defaultValue="0-50" />     -->
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Profile settings">
+		<EditTextPreference android:key="PREF_NAME_DEFAULT"
+			android:title="Set your name"  android:dialogTitle="Your name" />
+	</PreferenceCategory>
+
+	
+</PreferenceScreen>
