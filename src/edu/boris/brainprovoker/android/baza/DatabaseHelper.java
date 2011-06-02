@@ -10,7 +10,7 @@ public  class DatabaseHelper extends SQLiteOpenHelper
 
 	public static final  String TAG="DatabaseHelper";
 	private static final int DATABASE_VERSION = 2;
-	private static final String DATABASE_NAME = "scores";
+	private static final String DATABASE_NAME = "score";
 	private static final String DATABASE_CREATE =
 		"create table "+DBAdapterRezultat.TABLE+" ("+DBAdapterRezultat._ID+" integer primary key autoincrement, "
 		+ DBAdapterRezultat.NAME+" TEXT not null, "

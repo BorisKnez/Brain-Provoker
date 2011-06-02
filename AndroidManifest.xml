@@ -4,6 +4,7 @@
       android:versionCode="1"
       android:versionName="1.0">
     <uses-sdk android:minSdkVersion="8" />
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 
     <application android:name="Brain_provoker_app" android:label="@string/app_name" android:icon="@drawable/main_menu_icon">
     
@@ -43,6 +44,12 @@
 		</activity>
 		
 		<activity android:name=".Instructions" android:label="@string/app_name">
+			<intent-filter>
+				<category android:name="android.intent.category.LAUNCHER" />
+			</intent-filter>
+		</activity>
+		
+		<activity android:name=".OnlineBaza" android:label="@string/app_name">
 			<intent-filter>
 				<category android:name="android.intent.category.LAUNCHER" />
 			</intent-filter>

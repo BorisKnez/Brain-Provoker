@@ -12,6 +12,8 @@ public class ScoreListActivity extends ListActivity {
 		setContentView(R.layout.score_list_layout);
 		app = (Brain_provoker_app) getApplication();
 		setListAdapter(app.rezultati);
+		app.lista.clear();
+		app.fillFromDB();
 	}
 
 }

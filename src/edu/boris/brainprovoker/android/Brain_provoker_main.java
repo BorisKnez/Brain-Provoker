@@ -95,8 +95,12 @@ public class Brain_provoker_main extends Activity implements OnClickListener
             	if (arg0.getId()==R.id.btn_instructions)
             	{
             		instructions.startAnimation(alphaDown);
-            		Intent i = new Intent();
+            		/*Intent i = new Intent();
         			i.setClass(this, Instructions.class);
+        			startActivity(i);*/
+
+            		Intent i = new Intent();
+        			i.setClass(this, OnlineBaza.class);
         			startActivity(i);
         			instructions.startAnimation(alphaUp);
             	}

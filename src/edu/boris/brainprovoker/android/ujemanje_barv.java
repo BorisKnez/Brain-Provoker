@@ -231,7 +231,7 @@ public class ujemanje_barv extends Activity implements OnClickListener {
 				.setPositiveButton("Go to scores", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int id) {
-						app.rezultati.add(app.player);
+						app.addIgralec(app.player);
 						dialog.cancel();
 						gotoscores();
 		    			finish();

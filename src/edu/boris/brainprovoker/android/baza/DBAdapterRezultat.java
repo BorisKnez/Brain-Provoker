@@ -11,8 +11,8 @@ import android.provider.BaseColumns;
 public class DBAdapterRezultat implements BaseColumns {
 	public static final  String TAG="DBAdapterRezultat";
 
-	public static final  String VALUE = "i_value";
-	public static final  String NAME = "s_name";
+	public static final  String VALUE = "Score";
+	public static final  String NAME = "Name";
 	public static final  int POS__ID=0;
 	public static final  int POS_NAME=1;
 	public static final  int POS_VALUE=2;
