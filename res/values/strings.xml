@@ -3,4 +3,6 @@
     <string name="app_name">Brain Provoker</string>
     <color name="svetlo_zelena">#00EE00</color>
     <color name="Modra">#009ACD</color>
+    <string name="scores">Get scores</string>
+    <string name="send">Send scores online</string>
 </resources>
