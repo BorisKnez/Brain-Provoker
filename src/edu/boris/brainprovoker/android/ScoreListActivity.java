@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class ScoreListActivity extends ListActivity implements OnClickListener{
 	Brain_provoker_app app;
@@ -44,21 +45,34 @@ public class ScoreListActivity extends ListActivity implements OnClickListener{
 			}
 			if(returnstring.length()>3)
 			{
+				boolean obstaja=false;
 				String[] words;
 				words=returnstring.split(";");
-				
-				for(int i=0;i<words.length;i=i+2)
+				if(words.length>=2) //vsaj 1 user
 				{
-					igralec tmp=new igralec();
-					tmp.ime=words[i];
-					tmp.score=Integer.parseInt(words[i+1]);
-					//System.out.println(words[i]);
-					//System.out.println(words[i+1]);
-					app.addIgralec(tmp);
+					for(int i=0;i<words.length;i=i+2)
+					{
+						igralec tmp=new igralec();
+						tmp.ime=words[i];
+						tmp.score=Integer.parseInt(words[i+1]);
+						obstaja=false;
+						System.out.println(app.lista.size());
+						for(int j=0;j<app.lista.size();j++)
+						{
+							System.out.println("."+tmp.ime+"."+"------"+"."+app.lista.get(j).ime+".");
+							if(tmp.ime.hashCode() == app.lista.get(j).ime.hashCode())
+							{
+								obstaja=true;
+								break;
+							}
+						}
+						if(obstaja == false)app.addIgralec(tmp);
+					}
 				}
 				app.lista.clear();
 				app.fillFromDB();
 			}
+			Toast.makeText(this, "Done! If no changes no new scores!", Toast.LENGTH_LONG).show();
 		}
 		else
 			if (v.getId()==R.id.btnSendScores)
@@ -75,6 +89,7 @@ public class ScoreListActivity extends ListActivity implements OnClickListener{
 						getScores scores=new getScores();
 						System.out.println(poslji);
 						scores.SendRezultat(poslji);
+						Toast.makeText(this, "Done!", Toast.LENGTH_LONG).show();
 					} catch (IOException e) {
 						e.printStackTrace();
 					} catch (XmlPullParserException e) {

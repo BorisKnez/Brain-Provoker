@@ -60,6 +60,8 @@ public class getScores {
     	try
     	{
     		sht.call(SOAP_ACTION_SEND, envelope);
+    		SoapPrimitive result=(SoapPrimitive) envelope.getResponse();
+    		System.out.println("OK : " + result.toString());
     	}
     	catch(Exception e)
     	{
