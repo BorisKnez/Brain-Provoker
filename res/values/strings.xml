@@ -5,4 +5,5 @@
     <color name="Modra">#009ACD</color>
     <string name="scores">Get scores</string>
     <string name="send">Send scores online</string>
+    <color name="svetlo_siva">#242424</color>
 </resources>

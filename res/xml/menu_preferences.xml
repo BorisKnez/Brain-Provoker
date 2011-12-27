@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 	<!-- Display settings -->
-	<PreferenceCategory android:title="Settings">
+	<PreferenceCategory android:title="Nastavitve">
 		<!--  <CheckBoxPreference android:key="ISOK"
 			android:title="Pomoc pri ugibanju" 
 			android:summaryOn="DA!"
@@ -14,9 +14,9 @@
 			android:dialogTitle="Izberi vrednost"
 			android:defaultValue="0-50" />     -->
 	</PreferenceCategory>
-	<PreferenceCategory android:title="Profile settings">
+	<PreferenceCategory android:title="Nastavitve igralca">
 		<EditTextPreference android:key="PREF_NAME_DEFAULT"
-			android:title="Set your name"  android:dialogTitle="Your name" />
+			android:title="Nastavite svoje ime"  android:dialogTitle="Ime" />
 	</PreferenceCategory>
 
 	

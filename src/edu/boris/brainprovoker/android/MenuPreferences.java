@@ -29,6 +29,6 @@ public class MenuPreferences extends PreferenceActivity {
 		super.onPause();
 		SharedPreferences settings =  PreferenceManager.getDefaultSharedPreferences(app); 
 		app.player.ime=settings.getString(PREF_NAME_DEFAULT,"");
-		//Toast.makeText(this, app.player.ime, Toast.LENGTH_LONG).show();
+		//Toast.makeText(this, settings.getString(PREF_NAME_DEFAULT,""), Toast.LENGTH_LONG).show();
 	}
 }

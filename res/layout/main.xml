@@ -2,15 +2,43 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/main_menu_game1" android:orientation="vertical" android:layout_height="match_parent" android:layout_width="match_parent" android:gravity="bottom">
     <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout1" android:gravity="center">
-        <ImageButton android:layout_height="45dip" android:id="@+id/btn_new_game" android:layout_width="170dip" android:background="@drawable/new_game" android:layout_alignParentTop="true"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/btn_new_game"
+            android:layout_width="170dip"
+            android:layout_height="45dip"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/novaigra" >
+</ImageButton>
     </RelativeLayout>
     <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout2" android:gravity="center" android:layout_marginTop="4dip">
-        <ImageButton android:layout_height="45dip" android:id="@+id/btn_settings" android:layout_width="170dip" android:background="@drawable/settings" android:layout_alignParentTop="true"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/btn_settings"
+            android:layout_width="170dip"
+            android:layout_height="45dip"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/nastavitve" >
+</ImageButton>
     </RelativeLayout>
     <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout3" android:gravity="center" android:layout_marginTop="4dip">
-        <ImageButton android:id="@+id/btn_instructions" android:layout_width="170dip" android:layout_height="45dip" android:background="@drawable/instructions" android:layout_alignParentTop="true"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/btn_trening"
+            android:layout_width="170dip"
+            android:layout_height="45dip"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/trening" >
+</ImageButton>
     </RelativeLayout>
     <RelativeLayout android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/relativeLayout4" android:gravity="center" android:layout_marginTop="4dip" android:layout_marginBottom="20dip">
-        <ImageButton android:id="@+id/btn_quit" android:layout_width="170dip" android:layout_height="45dip" android:background="@drawable/quit" android:layout_alignParentTop="true"></ImageButton>
+
+        <ImageButton
+            android:id="@+id/btn_quit"
+            android:layout_width="170dip"
+            android:layout_height="45dip"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/izhod_main" >
+</ImageButton>
     </RelativeLayout>
 </LinearLayout>

@@ -16,7 +16,7 @@
                android:background="#FF0000"
                android:text="No data"/>
      <LinearLayout android:id="@+id/linearLayout1" android:layout_height="wrap_content" android:layout_width="match_parent" android:gravity="right">
-         <Button android:id="@+id/btnGetScores" android:layout_width="wrap_content" android:text="@string/scores" android:layout_height="wrap_content"></Button>
-         <Button android:id="@+id/btnSendScores" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/send"></Button>
+         <Button android:id="@+id/btnGetScores" android:layout_width="wrap_content" android:text="Pridobi rezultate" android:layout_height="wrap_content" android:layout_weight="1"></Button>
+         <Button android:id="@+id/btnSendScores" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Poslji rezultate" android:layout_weight="1.5"></Button>
      </LinearLayout>
  </LinearLayout>

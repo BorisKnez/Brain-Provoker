@@ -4,21 +4,22 @@ public class igralec {
 	public String ime;
 	public int score;
 	private long dbID;
-	
-	igralec(String i, int s)
-	{
-		this.ime=i;
-		this.score=s;
+
+	igralec(String i, int s) {
+		this.ime = i;
+		this.score = s;
 		setDbID(0);
 	}
-	
-	igralec(){}
-	
+
+	igralec() {
+	}
+
 	public void setDbID(long dbID) {
 		this.dbID = dbID;
 	}
+
 	public long getDbID() {
 		return dbID;
 	}
-	
+
 }

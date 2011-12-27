@@ -9,18 +9,18 @@ import android.widget.Button;
 
 public class Instructions extends Activity implements OnClickListener {
 	Button back;
+
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-        setContentView(R.layout.instructions);
-        back=(Button)findViewById(R.id.btnBack);
-        back.setOnClickListener(this);
+		setContentView(R.layout.instructions);
+		back = (Button) findViewById(R.id.btnBack);
+		back.setOnClickListener(this);
 	}
-	
-	 public void onClick(View arg0){
-		 if (arg0.getId()==R.id.btnBack)
-		 {
-			 finish();
-		 }
-	 }
+
+	public void onClick(View arg0) {
+		if (arg0.getId() == R.id.btnBack) {
+			finish();
+		}
+	}
 
 }
