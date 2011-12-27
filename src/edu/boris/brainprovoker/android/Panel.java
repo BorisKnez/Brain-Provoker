@@ -20,6 +20,7 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 
     public static float mWidth;
     public static float mHeight;
+    private boolean trening;
     
     int sirina, visina;
     public static final String PREF_NAME = "SETTINGS"; 
@@ -50,10 +51,11 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
     private Paint mPaint = new Paint();
     private Paint mPaint2 = new Paint();
     
-    public Panel(Context context, int x, int y) {
+    public Panel(Context context, int x, int y, boolean t) {
         super(context);
         getHolder().addCallback(this);
         mThread = new ViewThread(this);
+        trening=t;
         sirina=x;
         visina=y;
         generirajpolje();
@@ -95,8 +97,6 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
                 element.doDraw(canvas);
             }
         }
-        //canvas.drawText("FPS: " + Math.round(1000f / elapsed) + " Elements: " + mElementNumber, 10, 25, mPaint);
-        //canvas.drawText("Pravilni: "+pravilni+" Napacni: "+napacni+" Ostali: "+Integer.toString(rdecih+modrih+zelenih+rumenih-pravilni-napacni), 10, 25, mPaint);
         canvas.drawBitmap(slikaPravilni, 5, 0, null);
         canvas.drawText(""+pravilni, 5+slikaPravilni.getWidth()+5, 40, mPaint);
         canvas.drawBitmap(slikaNapacni, sirina-slikaNapacni.getWidth()-35, 0, null);
@@ -142,16 +142,16 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 	                    		if(mElements.get(i).barva==pravilnabarva)
 	                    		{
 	                    			pravilni++;
-	                    			((hitri_prsti)getContext()).app.player.score+=50;
-	                    		}else{napacni++;((hitri_prsti)getContext()).app.player.score-=100;}
+	                    			if(!trening)((hitri_prsti)getContext()).app.player.score+=50;
+	                    		}else{napacni++;if(!trening)((hitri_prsti)getContext()).app.player.score-=100;}
 	                    	}
 	                    	else
 		                    	{
 		                    		if(mElements.get(i).oblika==pravilnaoblika)
 		                    		{
 		                    			pravilni++;
-		                    			((hitri_prsti)getContext()).app.player.score+=50;
-		                    		}else{napacni++;((hitri_prsti)getContext()).app.player.score-=100;}
+		                    			if(!trening)((hitri_prsti)getContext()).app.player.score+=50;
+		                    		}else{napacni++;if(!trening)((hitri_prsti)getContext()).app.player.score-=100;}
 		                    	}
 	                    	mElements.remove(i);
 	                    }
@@ -161,10 +161,12 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
     	//poklikali vse možne, pravilne
     	if(pravilni==10)
     	{
-    		rezultat_iz_app=((hitri_prsti)getContext()).app.player.score;
+    		if(!trening)rezultat_iz_app=((hitri_prsti)getContext()).app.player.score;
         	
     		AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
             builder.setTitle("Koncali ste! Napake:  "+napacni);
+            if(!trening)
+            {
             builder.setMessage("Skupni rezultat: "+rezultat_iz_app);
             builder.setPositiveButton("Pojdi na rezultate",
 					new DialogInterface.OnClickListener() {
@@ -179,15 +181,19 @@ public class Panel extends SurfaceView implements SurfaceHolder.Callback {
 						}
 
 					});
+            }
             builder.setNegativeButton("Izhod",
 					new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog,
 								int id) {
 			
-							((hitri_prsti)getContext()).app.addIgralec(((hitri_prsti)getContext()).app.player);
+							if(!trening)((hitri_prsti)getContext()).app.addIgralec(((hitri_prsti)getContext()).app.player);
 							dialog.cancel();
-							((hitri_prsti)getContext()).finish();
+							if(!trening)
+							{
+								((hitri_prsti)getContext()).finish();
+							}else{((hitri_prsti_trening)getContext()).finish();}
 						}
 					});
             Dialog d = builder.create();

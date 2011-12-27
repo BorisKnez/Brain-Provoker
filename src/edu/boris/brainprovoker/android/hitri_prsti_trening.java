@@ -13,7 +13,7 @@ public class hitri_prsti_trening extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        Panel_trening igra=new Panel_trening(this, metrics.widthPixels, metrics.heightPixels);
+        Panel igra=new Panel(this, metrics.widthPixels, metrics.heightPixels, true);
         setContentView(igra);
     }
 }

@@ -18,7 +18,7 @@ public class hitri_prsti extends Activity {
         app = (Brain_provoker_app) getApplication();
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
-        Panel igra=new Panel(this, metrics.widthPixels, metrics.heightPixels);
+        Panel igra=new Panel(this, metrics.widthPixels, metrics.heightPixels, false);
         setContentView(igra);
     }
     
